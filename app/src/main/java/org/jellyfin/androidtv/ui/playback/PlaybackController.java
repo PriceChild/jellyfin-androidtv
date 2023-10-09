@@ -582,7 +582,8 @@ public class PlaybackController implements PlaybackControllerNotifiable {
                     mFragment.getContext(),
                     isLiveTv,
                     userPreferences.getValue().get(UserPreferences.Companion.getLiveTvDirectPlayEnabled()),
-                    userPreferences.getValue().get(UserPreferences.Companion.getAc3Enabled())
+                    userPreferences.getValue().get(UserPreferences.Companion.getAc3Enabled()),
+                    userPreferences.getValue().get(UserPreferences.Companion.getAacBypassEnabled())
             );
             Timber.i("*** Using extended Exoplayer profile options");
         } else {
