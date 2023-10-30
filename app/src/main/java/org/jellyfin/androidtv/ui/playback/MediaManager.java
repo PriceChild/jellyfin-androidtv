@@ -715,7 +715,7 @@ public class MediaManager {
         options.setMediaSources(item.getMediaSources());
         DeviceProfile profile;
         if (DeviceUtils.is60()) {
-            profile = new ExoPlayerProfile(context, false, false, false);
+            profile = new ExoPlayerProfile(context, false, false, false, false);
         } else {
             profile = new LibVlcProfile(context, false);
         }

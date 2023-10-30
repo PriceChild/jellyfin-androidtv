@@ -28,12 +28,13 @@ class ExoPlayerProfile(
 	isLiveTV: Boolean = false,
 	isLiveTVDirectPlayEnabled: Boolean = false,
 	isAC3Enabled: Boolean = false,
+	isAACBYPASSEnabled: Boolean = false,
 ) : BaseProfile() {
-	private val downmixSupportedAudioCodecs = arrayOf(
-		Codec.Audio.AAC,
-		Codec.Audio.MP3,
-		Codec.Audio.MP2
-	)
+	private val downmixSupportedAudioCodecs = buildList {
+		if (isAC3Enabled && isAACBYPASSEnabled) add(Codec.Audio.AC3) else add(Codec.Audio.AAC)
+		add(Codec.Audio.MP3)
+		add(Codec.Audio.MP2)
+	}.toTypedArray()
 
 	/**
 	 * Returns all audio codecs used commonly in video containers.
@@ -43,7 +44,7 @@ class ExoPlayerProfile(
 		addAll(downmixSupportedAudioCodecs)
 		add(Codec.Audio.AAC_LATM)
 		add(Codec.Audio.ALAC)
-		if (isAC3Enabled) add(Codec.Audio.AC3)
+		if (isAC3Enabled && !isAACBYPASSEnabled) add(Codec.Audio.AC3)
 		if (isAC3Enabled) add(Codec.Audio.EAC3)
 		add(Codec.Audio.DCA)
 		add(Codec.Audio.DTS)
